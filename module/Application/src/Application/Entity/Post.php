@@ -3,38 +3,40 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-/*use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\ManyToMany;
-use Doctrine\ORM\EntityManager;*/
 
 
 /**
- * @Entity
- * @Table(name="post")
+ * Post
+ *
+ * @ORM\Table(name="post")
+ * @ORM\Entity
  */
 class Post
 {
     /**
-     * @var int
+     * @var integer
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
-     * @ORM\Column(length="64")
+     * @ORM\Column(name="author", type="string", length=64)
      */
     private $author;
 
     /**
      * @var string
-     * @ORM\Column(length="1024")
+     * @ORM\Column(name="content", type="string", length=1024)
      */
     private $content;
 
-    /** @Column(type="timestamp", name="posted_at") */
+    /**
+     * @var timestamp
+     * @ORM\Column(name="posted_at", type="timestamp")
+     */
     private $postedAt;
 
     /**
