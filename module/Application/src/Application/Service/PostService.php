@@ -16,22 +16,22 @@ class PostService
 
     public function getLatestPosts()
     {
-        return $this->entityManager->getRepository('Application\Entity\Post')->findAll();
+        return $this->entityManager->getRepository('Application\Entity\Post')->findBy(array(), array('postedAt' => 'DESC'));
     }
 
     public function getRandomPosts()
     {
-
+        return $this->entityManager->getRepository('Application\Entity\Post')->findBy(array(), array('random()'));
     }
 
     public function getAllPosts()
     {
-
+        return $this->entityManager->getRepository('Application\Entity\Post')->findBy(array(), array('id' => 'ASC'));
     }
 
     public function getPost($id)
     {
-
+        return $this->entityManager->getRepository('Application\Entity\Post')->find($id);
     }
 
     public function createPost($author, $content)

@@ -9,6 +9,7 @@
 namespace Application\Controller;
 
 use Symfony\Component\Console\Application;
+use Zend\Json\Json;
 use Zend\Mvc\Controller\AbstractRestfulController,
     Zend\View\Model\JsonModel;
 
@@ -16,26 +17,41 @@ use Zend\Mvc\Controller\AbstractRestfulController,
 class PostController extends AbstractRestfulController
 {
 
-    private function postService() {
+    private function postService()
+    {
         return $this->getServiceLocator()->get('postService');
     }
 
     public function getList()
     {
-        switch($_GET['order']) {
+        switch ($_GET['order']) {
             case 'latest':
-                return new JsonModel($this->postService()->getLatestPosts());
+                return $this->toJson($this->postService()->getLatestPosts());
             case 'random':
-                return new JsonModel($this->postService()->getRandomPosts());
+                return $this->toJson($this->postService()->getRandomPosts());
         }
-        return new JsonModel($this->postService()->getAllPosts());
+        return $this->toJson($this->postService()->getAllPosts());
     }
 
-    public function get($id) {
-        return new JsonModel($this->postService()->getPost($id));
+    public function get($id)
+    {
+        return $this->toJson($this->postService()->getPost($id));
     }
 
-    public function create($data) {
-        return new JsonModel($this->postService()->createPost($_POST['author'], $_POST['content']));
+    public function create($data)
+    {
+        return $this->toJson($this->postService()->createPost($_POST['author'], $_POST['content']));
+    }
+
+    private function toJson($object) {
+        if (is_null($object)) {
+            return new JsonModel();
+        }
+        if (is_array($object)) {
+            return new JsonModel(array_map(function ($obj) {
+                return $obj->toArray();
+            }, $object));
+        }
+        return new JsonModel($object->toArray());
     }
 }

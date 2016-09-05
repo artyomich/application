@@ -1,6 +1,6 @@
 angular.module('postService', [])
 
-    .factory('Post', function ($http) {
+    .factory('postService', function ($http) {
 
         return {
             getLatestPosts: function()

@@ -1,11 +1,8 @@
 <!-- declare our angular app and controller -->
-<body id="postController" class="container" ng-init="initData(<% $post -> id%>)" ng-app="postApp" ng-controller="postController">
-
-<form ng-submit="submitPost()">
+<div class="container" ng-controller="postController">
     <div class="text-left">
-        { Form::label('post', 'Отправить ') }
-        { Form::select('sendPostId', $posts, null,['id'=>'sendPostId', 'ng-model'=>'sendPostId']) }
-        <input type="text" size="50" name="addPost" ng-model="addNewPost" placeholder="Сообщение">
+        <input type="text" size="10" name="author" ng-model="author" placeholder="Автор">
+        <input type="text" size="50" name="content" ng-model="content" placeholder="Сообщение">
         <button ng-click="sendPost()" class="btn btn-primary btn-lg">
             <i class="glyphicon glyphicon-plus-sign"></i> Написать сообщение
         </button>
@@ -16,34 +13,32 @@
             <h1 class="panel-title">
                 Лента постов
             </h1>
-            <button ng-click="getAllPosts()" class="btn btn-primary btn-lg">
+            <button ng-click="all()" class="btn btn-primary btn-lg">
                 <i class="glyphicon glyphicon-sort-by-attributes"></i>
             </button>
-            <button ng-click="getLatestPosts()" class="btn btn-primary btn-lg">
+            <button ng-click="latest()" class="btn btn-primary btn-lg">
                 <i class="glyphicon glyphicon-sort-by-attributes-alt"></i>
             </button>
-            <button ng-click="getRandomPosts()" class="btn btn-primary btn-lg">
+            <button ng-click="random()" class="btn btn-primary btn-lg">
                 <i class="glyphicon glyphicon-random"></i>
             </button>
 
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>№</th>
+                    <th>Дата</th>
                     <th>Сообщение</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="post in posts.post">
-                    <td class="nowrap">
-                        <% post.id %>
+                <tr ng-repeat="post in posts">
+                    <td class="nowrap" post-date="post.postedAt">
                     </td>
                     <td>
-                        <% post.author %>: <% post.content %>
+                        {{ post.author  }}: {{ post.content  }}
                     </td>
                 </tr>
                 </tbody></table>
         </div>
     </div>
-</form>
-</body>
+</div>

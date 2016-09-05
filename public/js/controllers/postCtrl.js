@@ -1,6 +1,4 @@
 angular.module('postCtrl', [])
-
-    // inject the orderItem service into our controller
     .controller('postController', function ($scope, $http, postService) {
         $scope.posts = [];
 
@@ -15,7 +13,7 @@ angular.module('postCtrl', [])
                 });
         };
 
-        $scope.latest = function() {
+        $scope.latest = function () {
             $scope.selectedSorting = $scope.latest;
             postService.getLatestPosts()
                 .success(function (data) {
@@ -23,7 +21,7 @@ angular.module('postCtrl', [])
                 });
         };
 
-        $scope.all = function() {
+        $scope.all = function () {
             $scope.selectedSorting = $scope.all;
             postService.getAllPosts()
                 .success(function (data) {
@@ -31,7 +29,7 @@ angular.module('postCtrl', [])
                 });
         };
 
-        $scope.random = function() {
+        $scope.random = function () {
             $scope.selectedSorting = $scope.random;
             postService.getRandomPosts()
                 .success(function (data) {
@@ -40,4 +38,12 @@ angular.module('postCtrl', [])
         };
 
         $scope.selectedSorting = $scope.latest;
-    });
+        $scope.selectedSorting();
+    })
+.directive('postDate', function() {
+   return function ($scope, element, attrs) {
+       $scope.$watch(attrs.postDate, function(value){
+           element.text(value.date.replace(/\.[0-9]+/, ''));
+       });
+   }
+});

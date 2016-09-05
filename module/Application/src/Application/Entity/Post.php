@@ -34,8 +34,8 @@ class Post
     private $content;
 
     /**
-     * @var timestamp
-     * @ORM\Column(name="posted_at", type="timestamp")
+     * @var datetime
+     * @ORM\Column(name="posted_at", type="datetime")
      */
     private $postedAt;
 
@@ -101,5 +101,9 @@ class Post
     public function setPostedAt($postedAt)
     {
         $this->postedAt = $postedAt;
+    }
+
+    public function toArray() {
+        return get_object_vars($this);
     }
 }
