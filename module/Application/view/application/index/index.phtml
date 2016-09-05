@@ -1,0 +1,45 @@
+<!-- declare our angular app and controller -->
+<div id="postController" class="container" ng-init="initData({{ $post -> id}})" ng-app="postApp" ng-controller="postController">
+
+<form ng-submit="submitPost()">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1 class="panel-title">
+                Лента постов
+            </h1>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Сообщение</th>
+                    <th>Удалить</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="post in posts.post">
+                    <td class="nowrap">
+                        {{ post.id }}
+                    </td>
+                    <td>
+                        {{ post.name }}: {{ post.content }}
+                    </td>
+                    <td>
+                        <button ng-click="deletePost(post)" class="btn btn-danger">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody></table>
+        </div>
+    </div>
+
+    <div class="text-left">
+        {{ Form::label('post', 'Отправить ') }}
+        {{ Form::select('addPostId', $posts,null,['id'=>'addPostId', 'ng-model'=>'addPostId']) }}
+        <input type="text" size="5" name="addPost" ng-model="addNewPost" placeholder="Сообщение">
+        <button ng-click="addPost()" class="btn btn-primary btn-lg">
+            <i class="glyphicon glyphicon-plus-sign"></i> Написать сообщение
+        </button>
+    </div>
+</form>
+</div>
