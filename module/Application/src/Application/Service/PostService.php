@@ -1,9 +1,12 @@
 <?php
 
+namespace Application\Doctrine2;
 namespace Application\Service;
 
 use Application\Entity\Post;
 use Doctrine\ORM\EntityManager;
+use Doctrine\DBAL\Query;
+
 
 class PostService
 {
@@ -21,12 +24,18 @@ class PostService
 
     public function getRandomPosts()
     {
-        return $this->entityManager->getRepository('Application\Entity\Post')->findBy(array(), array('random()'));
+/*        return $this->entityManager
+            ->getRepository('Application\Entity\Post')
+            ->findAll()
+            ->createQueryBuilder('e')
+            ->addSelect('RAND() as HIDDEN rand')
+            ->orderBy('rand');*/
+       return $this->entityManager->getRepository('Application\Entity\Post')->findAll();
     }
 
     public function getAllPosts()
     {
-        return $this->entityManager->getRepository('Application\Entity\Post')->findBy(array(), array('id' => 'ASC'));
+        return $this->entityManager->getRepository('Application\Entity\Post')->findBy(array(), array('postedAt' => 'ASC'));
     }
 
     public function getPost($id)
