@@ -1,77 +1,32 @@
-ZendSkeletonApplication
+Тестовое задание "Лента постов" Zend Framework 2 / AngularJS
 =======================
 
-Introduction
-------------
-This is a simple, skeleton application using the ZF2 MVC layer and module
-systems. This application is meant to be used as a starting place for those
-looking to get their feet wet with ZF2.
-
-Installation
-------------
-
-Using Composer (recommended)
+Используемые технологии
 ----------------------------
-The recommended way to get a working copy of this project is to clone the repository
-and use `composer` to install dependencies using the `create-project` command:
+Zend Framework 2 / AngularJS
 
-    curl -s https://getcomposer.org/installer | php --
-    php composer.phar create-project -sdev --repository-url="https://packages.zendframework.com" zendframework/skeleton-application path/to/install
+Краткое описание
+----------------------------
+Реализовать простую ленту постов. Верстка не имеет значения.
+Страница состоит из двух компонентов:
+Форма написания поста (заголовок и текстовое поле)
+Лента постов (без пагинации). В ленте постов есть три варианта отображения:
+Все посты в случайном порядке
+Посты за последнюю минуту, самые новые наверху
+Все посты в хронологическом порядке, наверху самые старые
+Требования к фронтенду
+Написать директиву для ленты постов / формы добавления
+Использовать модуль ngResource для синхронизации с бэкендом
+Страница работает без перезагрузки. При написании нового поста лента
+должна обновляться
 
-Alternately, clone the repository and manually invoke `composer` using the shipped
-`composer.phar`:
-
-    cd my/project/dir
-    git clone git://github.com/zendframework/ZendSkeletonApplication.git
-    cd ZendSkeletonApplication
-    php composer.phar self-update
-    php composer.phar install
-
-(The `self-update` directive is to ensure you have an up-to-date `composer.phar`
-available.)
-
-Another alternative for downloading the project is to grab it via `curl`, and
-then pass it to `tar`:
-
-    cd my/project/dir
-    curl -#L https://github.com/zendframework/ZendSkeletonApplication/tarball/master | tar xz --strip-components=1
-
-You would then invoke `composer` to install dependencies per the previous
-example.
-
-Using Git submodules
---------------------
-Alternatively, you can install using native git submodules:
-
-    git clone git://github.com/zendframework/ZendSkeletonApplication.git --recursive
-
-Web Server Setup
-----------------
-
-### PHP CLI Server
-
-The simplest way to get started if you are using PHP 5.4 or above is to start the internal PHP cli-server in the root directory:
-
-    php -S 0.0.0.0:8080 -t public/ public/index.php
-
-This will start the cli-server on port 8080, and bind it to all network
-interfaces.
-
-**Note: ** The built-in CLI server is *for development only*.
-
-### Apache Setup
-
-To setup apache, setup a virtual host to point to the public/ directory of the
-project and you should be ready to go! It should look something like below:
-
-    <VirtualHost *:80>
-        ServerName zf2-tutorial.localhost
-        DocumentRoot /path/to/zf2-tutorial/public
-        SetEnv APPLICATION_ENV "development"
-        <Directory /path/to/zf2-tutorial/public>
-            DirectoryIndex index.php
-            AllowOverride All
-            Order allow,deny
-            Allow from all
-        </Directory>
-    </VirtualHost>
+Требования к бэкенду
+----------------------------
+Стандарт кодирования - строго PSR-2
+Показать знание базовых инструментов фреймворка: миграции БД, composer,
+контейнер сервисов, роутинг, MVC, паттерны
+Правильно структурировать приложение. Не хранить код только в
+контроллерах/моделях
+Запросы на бэкенде обрабатываются REST-контроллерами, данные
+возвращаются в формате JSON
+Сортировка и фильтрация постов должны быть на бэкенде
